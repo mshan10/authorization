@@ -1,0 +1,1 @@
+angular.module('templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('./root.html','<div class="root">\n  Hello world!\n</div>\n');}]);

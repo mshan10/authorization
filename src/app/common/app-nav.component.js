@@ -8,4 +8,4 @@ var appNav = {
 
 angular
   .module('common')
-  .component('appNav', appNav)
+  .component('appNav', appNav);

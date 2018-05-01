@@ -1,12 +1,12 @@
 function AuthFormController() {
   var ctrl = this;
-  ctrl.$onChanges = fnction (changes) {
+  ctrl.$onChanges = function (changes) {
     if (changes.user) {
       ctrl.user = angular.copy(ctrl.user);
     }
   };
   ctrl.submitForm = function () {
-    cctrl.onSubmit({
+    ctrl.onSubmit({
       $event: {
         user: ctrl.user
       }

@@ -18,7 +18,9 @@ var gulp = require('gulp'),
   yargs = require('yargs'),
   path = require('path'),
   rename = require('gulp-rename'),
-  runSequence = require('run-sequence'); // this package takes and runs tasks
+  runSequence = require('run-sequence');
+
+   // this package takes and runs tasks
 // in series instead of in parallel. While this takes more time, it eliminates unexpected side-effects and errors.
 
 /* These definitions are unique to your file structure */
@@ -32,7 +34,9 @@ var argv = yargs.argv,
   templates = ['src/app/**/*.html'],
   modules = [
     'angular/angular.js',
-    '@uirouter/angularjs/release/angular-ui-router.js'
+    '@uirouter/angularjs/release/angular-ui-router.js',
+    'parse/dist/parse.min.js',
+    'angular-parse/angular-parse.js'
   ]; // these are 3rd party libraries in the node_modules folder NOT *.module.js files
 
 /* utility function to generate Unix DateTime Stamp */

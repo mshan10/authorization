@@ -4,10 +4,10 @@ function AppController(AuthService, $state) {
   ctrl.logout = function () {
     AuthService.logout().then(function () {
       $state.go('auth.login');
-    })
+    });
   };
 }
 
 angular
   .module('common')
-  .controller('AppController', AppController)
+  .controller('AppController', AppController);

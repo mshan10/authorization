@@ -4,7 +4,7 @@ var authForm = {
     button: '@',
     message: '@',
     onSubmit: '&'
-  };
+  },
   templateUrl: './auth-form.html',
   controller: 'AuthFormController'
 };

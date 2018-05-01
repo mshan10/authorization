@@ -17,7 +17,6 @@ function LoginController(AuthService, $state) {
       });
   };
 }
-}
 
 angular
   .module('components.auth')

@@ -21,7 +21,7 @@ function AuthService(Parse) {
       success: function (results) {
         console.log("Success")
       },
-      error: function(results, error) {
+      error: function(error) {
       }
 
     })

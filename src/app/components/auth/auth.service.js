@@ -1,25 +1,31 @@
-function AuthService($parseAuth) {
+function AuthService(Parse) {
   this.register = function (user) {
     var userData = new Parse.Object('Account')
     Parse.defineAttributes(userData, ['email', 'password'])
     userData.email = user.email;
     userData.password = user.password;
-
+    console.log(user);
     userData.save(null, {
 
       success: function(userData) {
       },
       error: function(userData, error) {
-
       }
     });
   }
-  // this.login = function (user) {
-  //   var Account = Parse.Object.extend("Account")
-  //   var query = new Parse.Query(Account)
-  //   query.include("email")
-  //   query.include("password")
-  // }
+  this.login = function (user) {
+    var Account = Parse.Object.extend("Account")
+    var query = new Parse.Query(Account)
+    query.equalTo("email", user.email, "password", user.password);
+    query.find({
+      success: function (results) {
+        console.log("Success")
+      },
+      error: function(results, error) {
+      }
+
+    })
+  }
 }
 
 

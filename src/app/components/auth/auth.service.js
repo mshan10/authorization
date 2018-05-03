@@ -1,16 +1,17 @@
 function AuthService(Parse) {
   var auth = new Parse.User();
-  var authData = null;
+  var currentUser = null;
   function storeAuthData(response) {
-    authData = response;
-    return authData;
+    currentUser = response;
+    return currentUser;
   }
   // function onSignIn(user) {
   //   authData = user;
   //   return auth.$requireSignIn();
   // }
   function clearAuthData() {
-    authData = null;
+    currentUser = Parse.User.current();
+    return currentUser;
   }
 
   this.register = function (user) {
@@ -29,10 +30,7 @@ function AuthService(Parse) {
   };
 
   this.login = function (user) {
-    auth.set("username", user.email);
-    auth.set("email", user.email);
-    auth.set("password", user.password);
-    return auth
+    return Parse.User
       .logIn(user.email, user.password, {
         success: function(auth) {
         },
@@ -43,23 +41,26 @@ function AuthService(Parse) {
   };
 
   this.logout = function () {
-    return auth
-      .logOut().then(clearAuthData);
+    return Parse.User.logOut().then(clearAuthData);
   };
 
-  // this.requireAuthentication = function () {
-  //   return auth
-  //     .$waitForSignIn().then(onSignIn);
-  // };
-
+  this.requireAuthentication = function () {
+    return new Promise((resolve, reject) => {
+      if (currentUser && currentUser.authenticated()) {
+        resolve();
+      } else {
+        reject();
+      }
+    })
+  };
 
   this.isAuthenticated = function () {
-    return !!authData;
+    return !!currentUser;
   };
 
   this.getUser = function () {
-    if (authData) {
-      return authData;
+    if (currentUser) {
+      return currentUser;
     }
   };
 };

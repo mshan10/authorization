@@ -1,5 +1,5 @@
 var appNav = {
-  binfings: {
+  bindings: {
     user: '<',
     onLogout: '&'
   },

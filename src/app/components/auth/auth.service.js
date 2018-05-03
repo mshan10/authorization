@@ -10,7 +10,7 @@ function AuthService(Parse) {
   //   return auth.$requireSignIn();
   // }
   function clearAuthData() {
-    authData = null;
+    authData = Parse.User.current();
   }
 
   this.register = function (user) {
@@ -42,9 +42,9 @@ function AuthService(Parse) {
       .then(storeAuthData);
   };
 
-  // this.logout = function () {
-  //   return Parse.User.logOut().then(clearAuthData);
-  // };
+  this.logout = function () {
+    return Parse.User.logOut().then(clearAuthData);
+  };
   //
   // this.requireAuthentication = function () {
   //   return auth

@@ -9,9 +9,9 @@ function AuthService(Parse) {
   //   authData = user;
   //   return auth.$requireSignIn();
   // }
-  // function clearAuthData() {
-  //   authData = null;
-  // }
+  function clearAuthData() {
+    authData = null;
+  }
 
   this.register = function (user) {
     return auth
@@ -52,14 +52,14 @@ function AuthService(Parse) {
   //     .$waitForSignIn().then(onSignIn);
   // };
   //
-  // this.isAuthenticated = function () {
-  //   return !!authData;
-  // };
-  // this.getUser = function () {
-  //   if (authData) {
-  //     return authData;
-  //   }
-  // };
+  this.isAuthenticated = function () {
+    return !!authData;
+  };
+  this.getUser = function () {
+    if (authData) {
+      return authData;
+    }
+  };
 };
 
 angular

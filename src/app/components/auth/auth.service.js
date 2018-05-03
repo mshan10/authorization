@@ -9,28 +9,31 @@ function AuthService(Parse) {
   //   authData = user;
   //   return auth.$requireSignIn();
   // }
-  // function clearAuthData() {
-  //   authData = null;
-  // }
+  function clearAuthData() {
+    authData = null;
+  }
 
   this.register = function (user) {
-    return auth
-      auth.set("email", user.email);
-      auth.set("password", user.password);
-
-      auth.signUp(null, {
-        success: function(auth) {
-        },
-        error: function(auth, error) {
-        alert("Error: " + error.code + " " + error.message);
-        }
-      })
-      .then(storeAuthData);
+    auth.set("username", user.email);
+    auth.set("email", user.email);
+    auth.set("password", user.password);
+      return auth
+        .signUp(null, {
+          success: function(auth) {
+          },
+          error: function(auth, error) {
+          alert("Error: " + error.code + " " + error.message);
+          }
+        })
+        .then(storeAuthData);
   };
 
   this.login = function (user) {
+    auth.set("username", user.email);
+    auth.set("email", user.email);
+    auth.set("password", user.password);
     return auth
-      .logIn(user.email, user.password, {
+      .logIn("email", "password", {
         success: function(auth) {
         },
         error: function(auth, error) {
@@ -55,11 +58,11 @@ function AuthService(Parse) {
   // this.isAuthenticated = function () {
   //   return !!authData;
   // };
-  // this.getUser = function () {
-  //   if (authData) {
-  //     return authData;
-  //   }
-  // };
+  this.getUser = function () {
+    if (authData) {
+      return authData;
+    }
+  };
 };
 
 angular

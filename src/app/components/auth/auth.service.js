@@ -42,9 +42,9 @@ function AuthService(Parse) {
       .then(storeAuthData);
   };
 
-  this.logout = function () {
-    return Parse.User.logOut().then(clearAuthData);
-  };
+  // this.logout = function () {
+  //   return Parse.User.logOut().then(clearAuthData);
+  // };
   //
   // this.requireAuthentication = function () {
   //   return auth

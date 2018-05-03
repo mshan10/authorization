@@ -55,9 +55,11 @@ function AuthService(Parse) {
   //     .$waitForSignIn().then(onSignIn);
   // };
   //
-  // this.isAuthenticated = function () {
-  //   return !!authData;
-  // };
+
+  this.isAuthenticated = function () {
+    return !!authData;
+  };
+
   this.getUser = function () {
     if (authData) {
       return authData;

@@ -33,7 +33,7 @@ function AuthService(Parse) {
     auth.set("email", user.email);
     auth.set("password", user.password);
     return auth
-      .logIn("email", "password", {
+      .logIn(user.email, user.password, {
         success: function(auth) {
         },
         error: function(auth, error) {

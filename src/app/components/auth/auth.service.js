@@ -45,7 +45,7 @@ function AuthService(Parse) {
   this.logout = function () {
     return auth
     .logOut().then(() => {
-      var currentUser = Parse.User.current();
+      authData = Parse.User.current();
     })
     .then(clearAuthData);
   };

@@ -9,6 +9,9 @@ function AuthService(Parse) {
   //   authData = user;
   //   return auth.$requireSignIn();
   // }
+  function clearAuthData() {
+    authData = null;
+  }
 
   this.register = function (user) {
     auth.set("username", user.email);
@@ -40,9 +43,8 @@ function AuthService(Parse) {
   };
 
   this.logout = function () {
-    return Parse.User.logOut().then(() => {
-      authData = Parse.User.current();
-    });
+    return auth
+      .logOut().then(clearAuthData);
   };
 
   // this.requireAuthentication = function () {

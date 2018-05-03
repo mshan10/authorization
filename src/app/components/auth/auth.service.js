@@ -43,11 +43,7 @@ function AuthService(Parse) {
   };
 
   this.logout = function () {
-    return auth
-    .logOut().then(() => {
-      authData = Parse.User.current();
-    })
-    .then(clearAuthData);
+    return Parse.User.logOut().then(clearAuthData);
   };
   //
   // this.requireAuthentication = function () {

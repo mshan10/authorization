@@ -9,9 +9,6 @@ function AuthService(Parse) {
   //   authData = user;
   //   return auth.$requireSignIn();
   // }
-  function clearAuthData() {
-    authData = Parse.User.current();
-  }
 
   this.register = function (user) {
     auth.set("username", user.email);
@@ -43,14 +40,16 @@ function AuthService(Parse) {
   };
 
   this.logout = function () {
-    return Parse.User.logOut().then(clearAuthData);
+    return Parse.User.logOut().then(() => {
+      authData = Parse.User.current();
+    });
   };
-  //
+
   // this.requireAuthentication = function () {
   //   return auth
   //     .$waitForSignIn().then(onSignIn);
   // };
-  //
+
 
   this.isAuthenticated = function () {
     return !!authData;

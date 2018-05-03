@@ -1,34 +1,51 @@
 function AuthService(Parse) {
+  var auth = new Parse.User();
+  var authData = null;
+  function storeAuthData(response) {
+    authData = response;
+    return authData;
+  }
+  function onSignIn(user) {
+    authData = user;
+    return auth.$requireSignIn();
+  }
+  function clearAuthData() {
+    authData = null;
+  }
+
   this.register = function (user) {
-    var userData = new Parse.Object('Account')
-    Parse.defineAttributes(userData, ['email', 'password'])
-    userData.email = user.email;
-    userData.password = user.password;
-    console.log(user);
-    userData.save(null, {
+    return auth
+      auth.set("email", user.email);
+      auth.set("password", user.password);
 
-      success: function(userData) {
-      },
-      error: function(userData, error) {
-      }
-    });
-  }
+      auth.signUp(null, {
+        success: function(auth) {
+        },
+        error: function(auth, error) {
+        alert("Error: " + error.code + " " + error.message);
+        }
+      })
+      .then(storeAuthData);
+  };
+
   this.login = function (user) {
-    var Account = Parse.Object.extend("Account")
-    var query = new Parse.Query(Account)
-    query.equalTo("email", user.email, "password", user.password);
-    query.find({
-      success: function (results) {
-        console.log("Success")
-      },
-      error: function(error) {
-      }
+    return auth
+      .logIn(user.email, user.password, {
+        success: function(auth) {
+        },
+        error: function(auth, error) {
+        }
+      })
+      .then(storeAuthData);
+  };
 
+  this.logout = function () {
+    return auth
+    .logOut().then(() => {
+      var currentUser = Parse.User.current();
     })
-  }
-}
-
-
+    .then(clearAuthData);
+};
 
 
 

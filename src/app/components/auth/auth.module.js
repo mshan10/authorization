@@ -3,6 +3,7 @@ angular
     'ui.router',
     'ngParse'
   ])
+
   .config(['ParseProvider', function ($ParseProvider) {
 
     var MY_PARSE_APP_ID = 'Na9nmnwnvmp67Yt1BZ7jFKCCo1SUV8j04gbGFidH';

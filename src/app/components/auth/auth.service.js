@@ -5,20 +5,24 @@ function AuthService(Parse) {
     currentUser = response;
     return currentUser;
   }
-  // function onSignIn(user) {
-  //   authData = user;
-  //   return auth.$requireSignIn();
-  // }
+
   function clearAuthData() {
     currentUser = Parse.User.current();
     return currentUser;
   }
-
+  /**
+   * Takes user object from the form and stores the email and password
+   * @type   {string} user.email     email
+   * @type   {string} user.password     password
+   * @returns {object} auth
+   */
   this.register = function (user) {
     auth.set("username", user.email);
-    auth.set("email", user.email);
     auth.set("password", user.password);
       return auth
+      /**
+      * Calls Parse.signUp function to store data in Parse.User class
+      */
         .signUp(null, {
           success: function(auth) {
           },

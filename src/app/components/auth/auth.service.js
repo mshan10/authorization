@@ -47,9 +47,9 @@ function AuthService(Parse) {
   };
   /**
    * Takes user object from the form and calls Parse.User.logIn function which takes in a username and password
-   * @type   {string} user.email     email
-   * @type   {string} user.password     password
-   * .then
+   * @param   {string}    user.email        email
+   * @param   {string}    user.password     password
+   * @param   {function}  storeAuthData     calls storeAuthData function to store current user
    */
   this.login = function (user) {
     return Parse.User
@@ -62,10 +62,16 @@ function AuthService(Parse) {
       .then(storeAuthData);
   };
 
+  /**
+   * Uses Parse.User.logOut method to log user out and then clears the current stored user by calling the clearAuthData function
+   */
   this.logout = function () {
     return Parse.User.logOut().then(clearAuthData);
   };
 
+  /**
+   * Makes sure the user is authenticated before accessing the "app"
+   */
   this.requireAuthentication = function () {
     return new Promise((resolve, reject) => {
       if (currentUser && currentUser.authenticated()) {
@@ -76,10 +82,17 @@ function AuthService(Parse) {
     })
   };
 
+  /**
+   * Checks if user is authenticated. returns true or false
+   * @return {boolean}  returns true or false
+   */
   this.isAuthenticated = function () {
     return !!currentUser;
   };
 
+  /**
+   * Gets the currentUser stored locally
+   */
   this.getUser = function () {
     if (currentUser) {
       return currentUser;
